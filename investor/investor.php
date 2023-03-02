@@ -53,11 +53,11 @@
         </nav>
         <!-- END -- Add HTML code for the top menu section (navigation bar) -->
         <div class="jumbotron"> 
-            <p class="lead">You can use this website to execute SQL queries on COMPANY Database <p> 
+            <p class="lead"> We found the following data to be of value for investors <p> 
             <hr class="my-4"> 
             <form method="GET" action="employee.php"> 
                 <select name="emp" onchange='this.form.submit()'> 
-                    <option selected>Select a name</option> 
+                    <option selected> Select a County </option> 
 
                     <?php 
                     //Saving the connection through a set of global variables from config file
