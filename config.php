@@ -1,6 +1,6 @@
 <?php
 define('DBHOST', 'localhost');
-define('DBNAME', 'parcelPortal');
+define('DBNAME', 'ParcelPortal');
 //define('DBNAME', 'parcelPortal');
 define('DBUSER', 'testuser');
 define('DBPASS', 'mypassword');
