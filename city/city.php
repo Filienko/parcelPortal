@@ -97,8 +97,7 @@
                                 JOIN landparcel L on T.Taxpayer_ID = L.Taxpayer_ID
                                 JOIN taxinfo I on L.Parcel_ID = I.Parcel_ID
                                 JOIN building B on I.Parcel_ID = B.Parcel_ID
-                                WHERE T.Taxpayer_ID = '{$_GET['city']}'
-                                GROUP by T.TAXID, T.PID, T.PTYPE, T.FN, T.LN, T.S, T.TCITY, T.Z, T.LVAL, T.PCTTAX ";
+                                WHERE T.Taxpayer_ID = '{$_GET['city']}' ";
 
                         if ($result = mysqli_query($connection, $sql))  
                         { 
@@ -115,7 +114,7 @@
                         <td><?php echo $row['TCITY'] ?></td> 
                         <td><?php echo $row['Z'] ?></td>
                         <td><?php echo $row['LVAL'] ?></td> 
-                        <td><?php echo $row['I.Pct_Tax_Change'] ?></td>
+                        <td><?php echo $row['PCTTAX'] ?></td>
                     </tr>
                     <?php
                             }
