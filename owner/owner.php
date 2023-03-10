@@ -122,10 +122,10 @@
                             die( mysqli_connect_error() );   
                         } 
                         $sql = "  
-                            SELECT Parcel_ID PID, Street, City, Zip, 
-                                    Assessed_Land_Val LAND, Assessed_Improvements_Val IMP, 
-                                    (Assessed_Land_Val + Assessed_Improvements_Val) TOT,
-                                    Tax_Yr TY, Pct_Tax_Incr TINC
+                            SELECT LP.Parcel_ID PID, LP.Street, LP.City, LP.Zip, 
+                                    TI.Assessed_Land_Val LAND, TI.Assessed_Improvements_Val IMP, 
+                                    (TI.Assessed_Land_Val + TI.Assessed_Improvements_Val) TOT,
+                                    TI.Tax_Yr TY, TI.Pct_Tax_Incr TINC
                             FROM landparcel LP JOIN taxinfo TI ON LP.Parcel_ID = TI.Parcel_ID
                             WHERE LP.Parcel_ID = {$_GET['parcel']}";
 
