@@ -27,7 +27,7 @@
     <div class="jumbotron"> 
         <p class="lead"> We found the following data to be of value for investors <p> 
         <hr class="my-4"> 
-        <form method="GET" action="employee.php"> 
+        <form method="GET" action="investor.php"> 
             <select name="emp" onchange='this.form.submit()'> 
                 <option selected> Select City </option> 
 
@@ -81,12 +81,12 @@
                     { 
                         die( mysqli_connect_error() );   
                     } 
-                   
+
 
                     $sql =  "SELECT P.Parcel_ID PID, P.City PC, CT.County PCC, TX.Assessed_Land_Val TXA
                     FROM county CT, taxinfo TX, landparcel P
-                    WHERE P.County = CT.County AND P.Parcel_ID = TX.Parcel_ID AND P.City = 'Tacoma'
-                    AND CT.Pct_Age_Over_65 <
+                    WHERE P.County = CT.County AND P.Parcel_ID = TX.Parcel_ID AND P.City = '{$_GET['emp']}'
+                    AND CT.Pct_Age_Over_65 <=
                     (SELECT AVG(Pct_Age_Over_65)
                     FROM county)
                     AND TX.Assessed_Land_Val <
@@ -94,7 +94,7 @@
                     FROM taxinfo)
                     GROUP BY CT.COUNTY
                     ORDER BY TX.Assessed_Land_Val DESC";
-                    
+
                                 if ($result = mysqli_query($connection, $sql))  
                                 { 
                         while($row = mysqli_fetch_assoc($result)) 
