@@ -56,8 +56,8 @@
             <p class="lead">You can use this website to execute SQL queries on COMPANY Database <p> 
             <hr class="my-4"> 
             <form method="GET" action="buyer.php"> 
-                <select name="emp" onchange='this.form.submit()'> 
-                    <option selected>Select a name</option> 
+                <select name="prop" onchange='this.form.submit()'>
+                    <option selected>Select a property type</option>
 
                     <?php 
                     //Saving the connection through a set of global variables from config file
@@ -67,8 +67,8 @@
                     if ( mysqli_connect_errno() )  
                     { 
                         die( mysqli_connect_error() );   
-                    } 
-                    $sql = "select Lname, Fname, SSN from EMPLOYEE"; 
+                    }
+                    $sql = "SELECT DISTINCT property_type FROM building";
                     //Saving the location of the project after the sql statement through storing it in a row variable
                     // where $ is analogous to a var keyword from JS in php-->
 
@@ -78,10 +78,10 @@
                         // loop through the data 
                         while($row = mysqli_fetch_assoc($result)) 
                         { 
-                            echo '<option value="' . $row['SSN'] . '">'; 
-                            echo $row['Lname']. ', '. $row['Fname'];  
-                            echo "</option>"; 
-                        } 
+                            echo '<option value="' . $row['property_type'] . '">';
+                            echo $row['property_type'];
+                            echo "</option>";
+                        }
                         // release the memory used by the result set 
                         mysqli_free_result($result);  
                     }  
@@ -90,19 +90,17 @@
                 <?php 
                 if ($_SERVER["REQUEST_METHOD"] == "GET")  
                 { 
-                    if (isset($_GET['emp']) )  
+                    if (isset($_GET['prop']) )
                     { 
                 ?> 
                 <p>&nbsp;</p> 
                 <table class="table table-hover"> 
                     <thead> 
                         <tr class="table-success"> 
-                            <th scope="col">Last Name</th> 
-                            <th scope="col">First Name</th> 
-                            <th scope="col">Social Security #</th> 
-                            <th scope="col">Salary</th> 
-                            <th scope="col">Birth Date</th> 
-                            <th scope="col">Department</th> 
+                            <th scope="col">Parcel_ID</th>
+                            <th scope="col">Building Quality</th>
+                            <th scope="col">Land Value</th>
+                            <th scope="col">Improvements Value</th>
                         </tr> 
                     </thead> 
                     <?php            
@@ -110,10 +108,12 @@
                         { 
                             die( mysqli_connect_error() );   
                         } 
-                        $sql = "  SELECT *  
-                            FROM EMPLOYEE, DEPARTMENT  
-                            WHERE SSN = {$_GET['emp']} AND     
-                                  EMPLOYEE.Dno = DEPARTMENT.Dnumber"; 
+                        $sql = "SELECT parcel.parcel_id, building.quality, building.property_type, taxinfo.assessed_land_val, taxinfo.assessed_improvements_val
+                            FROM taxinfo, building, landparcel
+                            WHERE building.property_type = {$_GET['prop']} AND
+                                  building.parcel_id = landparcel.parcel_id AND
+                                  landparcel.parcel_id = taxinfo.parcel_id AND
+                                  taxinfo.tax_yr = 2023";
 
                         if ($result = mysqli_query($connection, $sql))  
                         { 
@@ -121,12 +121,10 @@
                             { 
                     ?> 
                     <tr> 
-                        <td><?php echo $row['Lname'] ?></td> 
-                        <td><?php echo $row['Fname'] ?></td> 
-                        <td><?php echo $row['Ssn'] ?></td> 
-                        <td><?php echo $row['Salary'] ?></td> 
-                        <td><?php echo $row['Bdate'] ?></td> 
-                        <td><?php echo $row['Dname'] ?></td> 
+                        <td><?php echo $row['parcel_id'] ?></td>
+                        <td><?php echo $row['quality'] ?></td>
+                        <td><?php echo $row['assessed_land_val'] ?></td>
+                        <td><?php echo $row['assessed_improvements_val'] ?></td>
                     </tr> 
                     <?php 
                             } 
