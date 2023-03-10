@@ -22,7 +22,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
-  <img class="w3-image" src="/w3images/london2.jpg" alt="London" width="1500" height="700">
+    <img class="w3-image" src="/BG_w.jpg" alt="Background" width="1500" height="700">
   <div class="w3-display-middle" style="width:65%">
     <div class="w3-bar w3-black">
       <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'investor');"><i class="fa fa-map-marker w3-margin-right"></i>Invest</button>
@@ -81,7 +81,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   <div class="w3-row-padding w3-text-white w3-large">
     <div class="w3-half w3-margin-bottom">
       <div class="w3-display-container">
-        <img src="/w3images/cinqueterre.jpg" alt="Cinque Terre" style="width:100%">
+        <img src="/k1.jpg" alt="Cinque Terre" style="width:100%">
         <span class="w3-display-bottomleft w3-padding">King County</span>
       </div>
     </div>
@@ -89,13 +89,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <div class="w3-row-padding" style="margin:0 -16px">
         <div class="w3-half w3-margin-bottom">
           <div class="w3-display-container">
-            <img src="/w3images/newyork2.jpg" alt="New York" style="width:100%">
-            <span class="w3-display-bottomleft w3-padding">King County</span>
+            <img src="/p1.jpg" alt="New York" style="width:100%">
+            <span class="w3-display-bottomleft w3-padding">Pierce County</span>
           </div>
         </div>
         <div class="w3-half w3-margin-bottom">
           <div class="w3-display-container">
-            <img src="/w3images/sanfran.jpg" alt="San Francisco" style="width:100%">
+            <img src="/p2.jpg" alt="San Francisco" style="width:100%">
             <span class="w3-display-bottomleft w3-padding">Pierce County</span>
           </div>
         </div>
@@ -103,13 +103,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <div class="w3-row-padding" style="margin:0 -16px">
         <div class="w3-half w3-margin-bottom">
           <div class="w3-display-container">
-            <img src="/w3images/pisa.jpg" alt="Pisa" style="width:100%">
+            <img src="/k2.jpg" alt="Pisa" style="width:100%">
             <span class="w3-display-bottomleft w3-padding">King County</span>
           </div>
         </div>
         <div class="w3-half w3-margin-bottom">
           <div class="w3-display-container">
-            <img src="/w3images/paris.jpg" alt="Paris" style="width:100%">
+            <img src="/p3.jpg" alt="Paris" style="width:100%">
             <span class="w3-display-bottomleft w3-padding">Pierce County</span>
           </div>
         </div>
@@ -119,12 +119,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
   <!-- Explore Nature -->
   <div class="w3-container">
-    <h3>Explore Washington Real Esate Market</h3>
+    <h3>Explore Washington Housing Market </h3>
     <p> Look at these amazing opportunities.</p>
   </div>
   <div class="w3-row-padding">
     <div class="w3-half w3-margin-bottom">
-      <img src="/w3images/ocean2.jpg" alt="King County House" style="width:100%">
+      <img src="/se1.jpg" alt="King County House" style="width:100%">
       <div class="w3-container w3-white">
         <h3>Seattle, King </h3>
         <p class="w3-opacity">Evaluated at 1.2 million dollars</p>
@@ -133,7 +133,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       </div>
     </div>
     <div class="w3-half w3-margin-bottom">
-      <img src="/w3images/mountains2.jpg" alt="Austria" style="width:100%">
+      <img src="/tac1.jpg" alt="Austria" style="width:100%">
       <div class="w3-container w3-white">
         <h3>Tacoma, Pierce</h3>
         <p class="w3-opacity">Evaluated at 250000 dollars</p>
@@ -194,6 +194,7 @@ function openLink(evt, linkName) {
 // Click on the first tablink on load
 document.getElementsByClassName("tablink")[0].click();
 </script>
+
 
 </body>
 </html>
