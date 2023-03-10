@@ -55,7 +55,7 @@
         <div class="jumbotron"> 
             <p class="lead">You can use this website to execute SQL queries on COMPANY Database <p> 
             <hr class="my-4"> 
-            <form method="GET" action="employee.php"> 
+            <form method="GET" action="city.php"> 
                 <select name="emp" onchange='this.form.submit()'> 
                     <option selected>Select a name</option> 
 
