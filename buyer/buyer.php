@@ -56,7 +56,7 @@
             <p class="lead">You can use this website to execute SQL queries on COMPANY Database <p> 
             <hr class="my-4"> 
             <form method="GET" action="buyer.php"> 
-                <select name="prop" onchange='this.form.submit()'>
+                <select name="propertyType" onchange='this.form.submit()'>
                     <option selected>Select a property type</option>
 
                     <?php 
@@ -90,7 +90,7 @@
                 <?php 
                 if ($_SERVER["REQUEST_METHOD"] == "GET")  
                 { 
-                    if (isset($_GET['prop']) )
+                    if (isset($_GET['propertyType']) )
                     { 
                 ?> 
                 <p>&nbsp;</p> 
@@ -110,7 +110,7 @@
                         } 
                         $sql = "SELECT parcel.parcel_id, building.quality, building.property_type, taxinfo.assessed_land_val, taxinfo.assessed_improvements_val
                             FROM taxinfo, building, landparcel
-                            WHERE building.property_type = {$_GET['prop']} AND
+                            WHERE building.property_type = '{$_GET['propertyType']}' AND
                                   building.parcel_id = landparcel.parcel_id AND
                                   landparcel.parcel_id = taxinfo.parcel_id AND
                                   taxinfo.tax_yr = 2023";
