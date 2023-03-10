@@ -90,14 +90,15 @@
                         } 
 
 
-                        $sql =  "select T.Taxpayer_ID as TAXID,  I.parcel_ID AS PARCELID, B.Property_type AS PTYPE, T.fname AS FN, T.lname AS LN, T.street AS ADD, T.city AS TCITY,
-                                T.zip AS TZIP, I.Assessed_land_val AS LVAL, I.Pct_Tax_Change AS PCTTAX
+                        $sql =  "select T.Taxpayer_ID TAXID,  I.parcel_ID PID, B.Property_type PTYPE, 
+                                    T.fname FN, T.lname LN, T.street S, T.city TCITY,
+                                    T.zip Z, I.Assessed_land_val LVAL, I.Pct_Tax_Change PCTTAX
                                 FROM taxpayer T
-                                JOIN landparcel L on T.taxpayer_ID = L.taxpayer_ID
-                                JOIN taxinfo I on L.parcel_ID = I.parcel_ID
-                                JOIN building B on I.parcel_ID = B.parcel_ID
-                                WHERE Taxpayer_ID = '{$_GET['city']}'
-                                GROUP by TAXID, PARCELID, PTYPE, FN, LN, ADD, TCITY, TZIP, LVAL, PCTTAX ";
+                                JOIN landparcel L on T.Taxpayer_ID = L.Taxpayer_ID
+                                JOIN taxinfo I on L.Parcel_ID = I.Parcel_ID
+                                JOIN building B on I.Parcel_ID = B.Parcel_ID
+                                WHERE T.Taxpayer_ID = '{$_GET['city']}'
+                                GROUP by T.TAXID, T.PID, T.PTYPE, T.FN, T.LN, T.S, T.TCITY, T.Z, T.LVAL, T.PCTTAX ";
 
                         if ($result = mysqli_query($connection, $sql))  
                         { 
@@ -106,13 +107,13 @@
                     ?> 
                     <tr> 
                         <td><?php echo $row['TAXID'] ?></td> 
-                        <td><?php echo $row['PARCELID'] ?></td> 
+                        <td><?php echo $row['PID'] ?></td>
                         <td><?php echo $row['PTYPE'] ?></td>
                         <td><?php echo $row['FN'] ?></td> 
                         <td><?php echo $row['LN'] ?></td>
-                        <td><?php echo $row['ADD'] ?></td> 
+                        <td><?php echo $row['S'] ?></td>
                         <td><?php echo $row['TCITY'] ?></td> 
-                        <td><?php echo $row['TZIP'] ?></td> 
+                        <td><?php echo $row['Z'] ?></td>
                         <td><?php echo $row['LVAL'] ?></td> 
                         <td><?php echo $row['I.Pct_Tax_Change'] ?></td>
                     </tr>
