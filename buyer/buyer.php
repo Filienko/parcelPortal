@@ -5,59 +5,32 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Investment Opportunities</title>
+        <link rel="icon" type="image/png" href="/logo.jpeg"/>
+        <title>ParcelPortal</title>
         <!-- add a reference to the external stylesheet -->
-        <link rel="stylesheet" href="https://bootswatch.com/4/solar/bootstrap.min.css">
+        <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+
+            body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+            .myLink {display: none}
+        </style>
     </head>
     <body>
         <!-- START -- Add HTML code for the top menu section (navigation bar) -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
-            <a class="navbar-brand" href="#">Navbar</a> 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria- 
-                    controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation"> 
-                <span class="navbar-toggler-icon"></span> 
-            </button> 
+        <div class="w3-bar w3-white w3-border-bottom w3-xlarge">
+            <a href="index.php" class="w3-bar-item w3-button w3-text-blue w3-hover-blue"><b>ParcelPortal</b></a>
+        </div>
 
-            <div class="collapse navbar-collapse" id="navbarColor02"> 
-                <ul class="navbar-nav mr-auto"> 
-                </li> 
-                    <li class="nav-item"> 
-                        <a class="nav-link active" href="employee.php">Invest</a> 
-                    </li> 
-                    <li class="nav-item"> 
-                        <a class="nav-link" href="department.php">Evaluate your House</a> 
-                    </li> 
-                    <li class="nav-item"> 
-                        <a class="nav-link" href="project.php">Buy new House</a> 
-                    </li> 
-                    <li class="nav-item"> 
-                        <a class="nav-link" href="project.php">City Staff</a> 
-                    </li> 
-                   <!-- <li class="nav-item dropdown"> 
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria- 
-                           haspopup="true" aria-expanded="false">Dropdown</a> 
-                        <div class="dropdown-menu"> 
-                            <a class="dropdown-item" href="#">Action</a> 
-                            <a class="dropdown-item" href="#">Another action</a> 
-                            <a class="dropdown-item" href="#">Something else here</a> 
-                            <div class="dropdown-divider"></div> 
-                            <a class="dropdown-item" href="#">Separated link</a> 
-                        </div> 
-                    </li> -->
-                </ul> 
-                <form class="form-inline my-2 my-lg-0"> 
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search"> 
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> 
-                </form> 
-            </div> 
-        </nav>
         <!-- END -- Add HTML code for the top menu section (navigation bar) -->
-        <div class="jumbotron"> 
-            <p class="lead">You can use this website to execute SQL queries on COMPANY Database <p> 
-            <hr class="my-4"> 
-            <form method="GET" action="buyer.php"> 
-                <select name="emp" onchange='this.form.submit()'> 
-                    <option selected>Select a name</option> 
+        <div class="jumbotron">
+            <p class="lead"> This section is intended for prospective buyers.<p>
+            <hr class="my-4">
+            <form method="GET" action="buyer.php">
+                <select name="propertyType" onchange='this.form.submit()'>
+                    <option selected> Select a County </option>
 
                     <?php 
                     //Saving the connection through a set of global variables from config file
@@ -67,8 +40,8 @@
                     if ( mysqli_connect_errno() )  
                     { 
                         die( mysqli_connect_error() );   
-                    } 
-                    $sql = "select Lname, Fname, SSN from EMPLOYEE"; 
+                    }
+                    $sql = "SELECT DISTINCT county FROM county";
                     //Saving the location of the project after the sql statement through storing it in a row variable
                     // where $ is analogous to a var keyword from JS in php-->
 
@@ -78,10 +51,10 @@
                         // loop through the data 
                         while($row = mysqli_fetch_assoc($result)) 
                         { 
-                            echo '<option value="' . $row['SSN'] . '">'; 
-                            echo $row['Lname']. ', '. $row['Fname'];  
-                            echo "</option>"; 
-                        } 
+                            echo '<option value="' . $row['county'] . '">';
+                            echo $row['county'].' County';
+                            echo "</option>";
+                        }
                         // release the memory used by the result set 
                         mysqli_free_result($result);  
                     }  
@@ -90,19 +63,18 @@
                 <?php 
                 if ($_SERVER["REQUEST_METHOD"] == "GET")  
                 { 
-                    if (isset($_GET['emp']) )  
+                    if (isset($_GET['propertyType']) )
                     { 
                 ?> 
                 <p>&nbsp;</p> 
                 <table class="table table-hover"> 
                     <thead> 
                         <tr class="table-success"> 
-                            <th scope="col">Last Name</th> 
-                            <th scope="col">First Name</th> 
-                            <th scope="col">Social Security #</th> 
-                            <th scope="col">Salary</th> 
-                            <th scope="col">Birth Date</th> 
-                            <th scope="col">Department</th> 
+                            <th scope="col">County</th>
+                            <th scope="col">Parcel_ID</th>
+                            <th scope="col">Building Quality</th>
+                            <th scope="col">Land Value</th>
+                            <th scope="col">Improvements Value</th>
                         </tr> 
                     </thead> 
                     <?php            
@@ -110,10 +82,12 @@
                         { 
                             die( mysqli_connect_error() );   
                         } 
-                        $sql = "  SELECT *  
-                            FROM EMPLOYEE, DEPARTMENT  
-                            WHERE SSN = {$_GET['emp']} AND     
-                                  EMPLOYEE.Dno = DEPARTMENT.Dnumber"; 
+                        $sql = "SELECT landparcel.County, landparcel.parcel_id, building.quality, building.property_type, taxinfo.assessed_land_val, taxinfo.assessed_improvements_val
+                            FROM taxinfo, building, landparcel
+                            WHERE landparcel.county = '{$_GET['propertyType']}' AND
+                                  building.parcel_id = landparcel.parcel_id AND
+                                  landparcel.parcel_id = taxinfo.parcel_id AND
+                                  taxinfo.tax_yr = 2023;";
 
                         if ($result = mysqli_query($connection, $sql))  
                         { 
@@ -121,12 +95,11 @@
                             { 
                     ?> 
                     <tr> 
-                        <td><?php echo $row['Lname'] ?></td> 
-                        <td><?php echo $row['Fname'] ?></td> 
-                        <td><?php echo $row['Ssn'] ?></td> 
-                        <td><?php echo $row['Salary'] ?></td> 
-                        <td><?php echo $row['Bdate'] ?></td> 
-                        <td><?php echo $row['Dname'] ?></td> 
+                        <td><?php echo $row['County'] ?></td>
+                        <td><?php echo $row['parcel_id'] ?></td>
+                        <td><?php echo $row['quality'] ?></td>
+                        <td><?php echo $row['assessed_land_val'] ?></td>
+                        <td><?php echo $row['assessed_improvements_val'] ?></td>
                     </tr> 
                     <?php 
                             } 
