@@ -1,66 +1,36 @@
 <?php require_once('config.php');?>
-<!-- TCSS 445 Project Phase III -->
-<!-- Edited by Chloe Duncan -->
-<!-- 9 March 2023 -->
-
+<!-- Assignment 4 Template -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Investment Opportunities</title>
+        <link rel="icon" type="image/png" href="/images/logo.jpeg"/>
+        <title>ParcelPortal</title>
         <!-- add a reference to the external stylesheet -->
-        <link rel="stylesheet" href="https://bootswatch.com/4/solar/bootstrap.min.css">
+        <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+
+            body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+            .myLink {display: none}
+        </style>
     </head>
     <body>
         <!-- START -- Add HTML code for the top menu section (navigation bar) -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
-            <a class="navbar-brand" href="#">Navbar</a> 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria- 
-                    controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation"> 
-                <span class="navbar-toggler-icon"></span> 
-            </button> 
+<div class="w3-bar w3-white w3-border-bottom w3-xlarge">
+    <a href="index.php" class="w3-bar-item w3-button w3-text-blue w3-hover-blue"><b>ParcelPortal</b></a>
+</div>
 
-            <div class="collapse navbar-collapse" id="navbarColor02"> 
-                <ul class="navbar-nav mr-auto"> 
-                </li> 
-                    <li class="nav-item"> 
-                        <a class="nav-link active" href="employee.php">Invest</a> 
-                    </li> 
-                    <li class="nav-item"> 
-                        <a class="nav-link" href="department.php">Evaluate your House</a> 
-                    </li> 
-                    <li class="nav-item"> 
-                        <a class="nav-link" href="project.php">Buy new House</a> 
-                    </li> 
-                    <li class="nav-item"> 
-                        <a class="nav-link" href="project.php">City Staff</a> 
-                    </li> 
-                   <!-- <li class="nav-item dropdown"> 
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria- 
-                           haspopup="true" aria-expanded="false">Dropdown</a> 
-                        <div class="dropdown-menu"> 
-                            <a class="dropdown-item" href="#">Action</a> 
-                            <a class="dropdown-item" href="#">Another action</a> 
-                            <a class="dropdown-item" href="#">Something else here</a> 
-                            <div class="dropdown-divider"></div> 
-                            <a class="dropdown-item" href="#">Separated link</a> 
-                        </div> 
-                    </li> -->
-                </ul> 
-                <form class="form-inline my-2 my-lg-0"> 
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search"> 
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> 
-                </form> 
-            </div> 
-        </nav>
-        <!-- END -- Add HTML code for the top menu section (navigation bar) -->
-        <div class="jumbotron"> 
-            <p class="lead">You can use this website to execute SQL queries on COMPANY Database <p> 
-            <hr class="my-4"> 
-            <form method="GET" action="owner.php"> 
-                <select name="parcel" onchange='this.form.submit()'>
-                    <option selected>Select a name</option> 
+    <!-- END -- Add HTML code for the top menu section (navigation bar) -->
+    <div class="jumbotron"> 
+        <p class="lead"> We found the following data to be of value for home owners <p> 
+        <hr class="my-4"> 
+        <form method="GET" action="owner.php"> 
+            <select name="parcel" onchange='this.form.submit()'> 
+                <option selected> Select Address </option> 
 
                     <?php 
                     //Saving the connection through a set of global variables from config file
@@ -121,13 +91,13 @@
                         { 
                             die( mysqli_connect_error() );   
                         } 
-                        $sql = "  
-                            SELECT LP.Parcel_ID PID, LP.Street, LP.City, LP.Zip, 
-                                    TI.Assessed_Land_Val LAND, TI.Assessed_Improvements_Val IMP, 
-                                    (TI.Assessed_Land_Val + TI.Assessed_Improvements_Val) TOT,
-                                    TI.Tax_Yr TY, TI.Pct_Tax_Incr TINC
+                        $sql = "SELECT LP.Parcel_ID PID, Street, City, Zip, 
+                                    Assessed_Land_Val LAND, Assessed_Improvements_Val IMP, 
+                                    (Assessed_Land_Val + Assessed_Improvements_Val) TOT,
+                                    Tax_Yr TY, TI.Pct_Tax_Change TINC
                             FROM landparcel LP JOIN taxinfo TI ON LP.Parcel_ID = TI.Parcel_ID
-                            WHERE LP.Parcel_ID = {$_GET['parcel']}";
+                            WHERE LP.Parcel_ID = {$_GET['parcel']};";
+
 
                         if ($result = mysqli_query($connection, $sql))  
                         { 
@@ -142,6 +112,7 @@
                         <td><?php echo $row['LAND'] ?></td>
                         <td><?php echo $row['IMP'] ?></td>
                         <td><?php echo $row['TOT'] ?></td>
+                        <td><?php echo $row['TY'] ?></td>
                         <td><?php echo $row['TINC'] ?></td>
                     </tr> 
                     <?php 
@@ -154,6 +125,6 @@
                     ?> 
                 </table> 
             </form> 
-        </div>
-    </body>
-</html>
+            </div>
+        </body>
+        </html>

@@ -5,7 +5,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Investment Opportunities</title>
+        <link rel="icon" type="image/png" href="/images/logo.jpeg"/>
+        <title>ParcelPortal</title>
         <!-- add a reference to the external stylesheet -->
         <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -20,91 +21,136 @@
     <body>
         <!-- START -- Add HTML code for the top menu section (navigation bar) -->
 <div class="w3-bar w3-white w3-border-bottom w3-xlarge">
-  <a href="index.php" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b>ParcelPortal</b></a>
+    <a href="index.php" class="w3-bar-item w3-button w3-text-blue w3-hover-blue"><b>ParcelPortal</b></a>
 </div>
 
     <!-- END -- Add HTML code for the top menu section (navigation bar) -->
     <div class="jumbotron"> 
-        <p class="lead"> We found the following data to be of value for investors <p> 
+        <p class="lead"> We found the following categories to be of value for investors <p> 
         <hr class="my-4"> 
-        <form method="GET" action="investor.php"> 
-            <select name="emp" onchange='this.form.submit()'> 
-                <option selected> Select City </option> 
+        <form method="get" action="investor.php">
+            <select name="option" id="query" onchange='this.form.submit()'>
+                <option selected>Select Category</option>
+                <option value="oh">One Family Houses</option>
+                <option value="mh">Multi Family Houses</option>
+                <option value="up">Undervalued Properties</option>
+                <option value="gc">Gentrifying Cities</option>
+                <option value="sc">In a Safe County</option>
+                <option value="hc">In High Class City</option>
+            </select>
+        </form>
 
-                <?php 
-                //Saving the connection through a set of global variables from config file
-                //establishing the credentials and testuser name necessery for connecting to the DB hosted on VM
-                //if mistake is found in connection process, the connection is not continued
-                $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME); 
-                if ( mysqli_connect_errno() )  
-                { 
-                    die( mysqli_connect_error() );   
-                } 
-                $sql = "SELECT DISTINCT city FROM city"; 
-                //Saving the location of the project after the sql statement through storing it in a row variable
-                // where $ is analogous to a var keyword from JS in php-->
-
-                if ($result = mysqli_query($connection, $sql))  
-                { 
-                    //Stores query results as part of a row variable
-                    // loop through the data 
-                    while($row = mysqli_fetch_assoc($result)) 
-                    { 
-                        echo '<option value="' . $row['city'] . '">'; 
-                        echo $row['city'];  
-                        echo "</option>"; 
-                    } 
-                    // release the memory used by the result set 
-                    mysqli_free_result($result);  
-                }  
-                ?>  
-            </select> 
-
+        <form method="GET"> 
             <?php 
             if ($_SERVER["REQUEST_METHOD"] == "GET")  
             { 
-                if (isset($_GET['emp']) )  
+                if (isset($_GET['option']) )  
                 { 
             ?> 
             <p>&nbsp;</p> 
             <table class="table table-hover"> 
                 <thead> 
                     <tr class="table-success"> 
+                        <th scope="col">Building ID </th> 
                         <th scope="col">Parcel ID </th> 
+                        <th scope="col">Number of Beds </th> 
+                        <th scope="col">Number of Bathrooms </th> 
+                        <th scope="col">SQFT size of the building </th> 
+                        <th scope="col">Quality state of the building </th> 
                         <th scope="col">Parcel City </th> 
                         <th scope="col">Parcel County </th> 
                         <th scope="col">Current Land Value </th> 
                     </tr> 
                 </thead> 
-                <?php            
+                <?php           
+                    $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME); 
+
                     if ( mysqli_connect_errno() )  
                     { 
                         die( mysqli_connect_error() );   
                     } 
+                    
+                    $query = ($_GET['option']);
+                    $oh = "oh";
+                    $mh = "mh";
+                    $gc = "gc";
+                    $up = "up";
+                    $sc = "sc";
+                    $hc = "hc";
 
-
-                    $sql =  "SELECT P.Parcel_ID PID, P.City PC, CT.County PCC, TX.Assessed_Land_Val TXA
-                    FROM county CT, taxinfo TX, landparcel P
-                    WHERE P.County = CT.County AND P.Parcel_ID = TX.Parcel_ID AND P.City = '{$_GET['emp']}'
-                    AND CT.Pct_Age_Over_65 <=
-                    (SELECT AVG(Pct_Age_Over_65)
-                    FROM county)
-                    AND TX.Assessed_Land_Val <
-                    (SELECT AVG(Assessed_Land_Val)
-                    FROM taxinfo)
+                    if(strpos($query, $oh) !== false)
+                    {
+                        $sql =  "SELECT B.Building_Num BID,B.Num_Bed BN,B.Num_Bath BB,B.Sqft BSQ,B.Quality BQ, P.Parcel_ID PID, P.City PC, CT.County PCC, TX.Assessed_Land_Val TXA
+                    FROM county CT, taxinfo TX, landparcel P, building B
+                    WHERE P.County = CT.County AND P.Parcel_ID = TX.Parcel_ID AND B.Parcel_ID = P.Parcel_ID
+                    AND B.Property_Type = 'single family'
+                    GROUP BY CT.COUNTY
+                    ORDER BY TX.Assessed_Land_Val DESC";
+                    } else if(strpos($query, $mh) !== false) {
+                    $sql =  "SELECT B.Building_Num BID,B.Num_Bed BN,B.Num_Bath BB,B.Sqft BSQ,B.Quality BQ, P.Parcel_ID PID, P.City PC, CT.County PCC, TX.Assessed_Land_Val TXA
+                    FROM county CT, taxinfo TX, landparcel P, building B
+                    WHERE P.County = CT.County AND P.Parcel_ID = TX.Parcel_ID AND B.Parcel_ID = P.Parcel_ID
+                    AND B.Property_Type = 'multi family'
                     GROUP BY CT.COUNTY
                     ORDER BY TX.Assessed_Land_Val DESC";
 
+                    } else if(strpos($query, $gc) !== false) {
+                        $sql =  "SELECT B.Building_Num BID,B.Num_Bed BN,B.Num_Bath BB,B.Sqft BSQ,B.Quality BQ, P.Parcel_ID PID, P.City PC, CT.County PCC, TX.Assessed_Land_Val TXA
+                    FROM county CT, taxinfo TX, landparcel P, building B
+                    WHERE P.County = CT.County AND P.Parcel_ID = TX.Parcel_ID AND P.Parcel_ID = B.Parcel_ID
+                    AND CT.Pct_Age_Over_65 >
+                    (SELECT AVG(Pct_Age_Over_65)
+                    FROM county)
+                    AND CT.Pct_Collg_Grad >
+                    (SELECT AVG(Pct_Collg_Grad)
+                    FROM county)                    
+                    AND TX.Assessed_Land_Val <
+                    (SELECT AVG(Assessed_Land_Val)
+                    FROM taxinfo)
+                    ORDER BY TX.Assessed_Land_Val DESC";
+                    } else if(strpos($query, $up) !== false) {
+                        $sql =  "SELECT B.Building_Num BID,B.Num_Bed BN,B.Num_Bath BB,B.Sqft BSQ,B.Quality BQ, P.Parcel_ID PID, P.City PC, CT.County PCC, TX.Assessed_Land_Val TXA
+                    FROM county CT, taxinfo TX, landparcel P, building B
+                    WHERE P.County = CT.County AND P.Parcel_ID = TX.Parcel_ID AND P.Parcel_ID = B.Parcel_ID
+                    AND TX.Assessed_Land_Val <
+                    (SELECT AVG(Assessed_Land_Val)
+                    FROM taxinfo)
+                    ORDER BY TX.Assessed_Land_Val DESC";
+
+                    } else if(strpos($query, $sc) !== false) {
+                        $sql =  "SELECT B.Building_Num BID,B.Num_Bed BN,B.Num_Bath BB,B.Sqft BSQ,B.Quality BQ, P.Parcel_ID PID, P.City PC, CT.County PCC, TX.Assessed_Land_Val TXA
+                            FROM county CT, taxinfo TX, landparcel P, building B
+                            WHERE P.County = CT.County AND P.Parcel_ID = TX.Parcel_ID AND B.Parcel_ID = P.Parcel_ID
+                            AND CT.Pct_HS_Grad > 
+                            (SELECT AVG(Pct_Age_Under_18)
+                             FROM county)
+                            AND CT.Pct_Unemployed <= 0.1 *
+                            (SELECT AVG(Pct_Unemployed)
+                             FROM county)";
+
+                    } else if(strpos($query, $hc) !== false){
+                        $sql =  "SELECT B.Building_Num BID,B.Num_Bed BN,B.Num_Bath BB,B.Sqft BSQ,B.Quality BQ, P.Parcel_ID PID, P.City PC, CT.County PCC, TX.Assessed_Land_Val TXA
+                    FROM county CT, taxinfo TX, landparcel P, building B
+                    WHERE P.County = CT.County AND P.Parcel_ID = TX.Parcel_ID AND B.Parcel_ID = P.Parcel_ID
+                    AND CT.Pct_HS_Grad >= 70
+                    AND CT.Pct_Collg_Grad >= 70";
+                }
                                 if ($result = mysqli_query($connection, $sql))  
                                 { 
                         while($row = mysqli_fetch_assoc($result)) 
                         { 
                 ?> 
                 <tr> 
+                    <td><?php echo $row['BID'] ?></td> 
                     <td><?php echo $row['PID'] ?></td> 
+                    <td><?php echo $row['BB'] ?></td> 
+                    <td><?php echo $row['BN'] ?></td> 
+                    <td><?php echo $row['BSQ'] ?></td> 
+                    <td><?php echo $row['BQ'] ?></td> 
                     <td><?php echo $row['PC'] ?></td> 
                     <td><?php echo $row['PCC'] ?></td> 
                     <td><?php echo $row['TXA'] ?></td> 
+
                 </tr> 
                 <?php 
                         } 

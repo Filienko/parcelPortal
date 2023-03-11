@@ -5,7 +5,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Investment Opportunities</title>
+        <link rel="icon" type="image/png" href="/images/logo.jpeg"/>
+        <title>ParcelPortal</title>
         <!-- add a reference to the external stylesheet -->
         <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -20,12 +21,12 @@
     <body>
         <!-- START -- Add HTML code for the top menu section (navigation bar) -->
         <div class="w3-bar w3-white w3-border-bottom w3-xlarge">
-            <a href="index.php" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b>ParcelPortal</b></a>
+            <a href="index.php" class="w3-bar-item w3-button w3-text-blue w3-hover-blue"><b>ParcelPortal</b></a>
         </div>
 
         <!-- END -- Add HTML code for the top menu section (navigation bar) -->
         <div class="jumbotron">
-            <p class="lead"> This section is intended for City clerk inquiries, credentials required.<p>
+            <p class="lead"> This section is intended for City clerk inquiries, credentials not required.<p>
             <hr class="my-4">
             <form method="GET" action="city.php">
                 <select name="city" onchange='this.form.submit()'>
