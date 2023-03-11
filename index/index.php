@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="icon" type="image/png" href="/logo.jpeg"/>
+    <link rel="icon" type="image/png" href="/images/logo.jpeg"/>
 
 <title>ParcelPortal</title>
 <meta charset="UTF-8">
@@ -13,7 +13,7 @@
 <style>
     .parallax {
         /* The image used */
-        background-image: url("/BG_w.jpg");
+        background-image: url("/images/BG_w.jpg");
 
         /* Set a specific height */
         min-height: 500px;
@@ -34,7 +34,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 <div class="w3-bar w3-white w3-border-bottom w3-xlarge">
     <a href="#" class="w3-bar-item w3-button w3-text-blue w3-hover-blue"><b>ParcelPortal</b></a>
     <div class="logo-image" >
-        <img src="/logo.jpeg" class="img-fluid" style="width: auto; height: auto;max-width: 40px;max-height: 40px;  padding-top: 8px;">
+        <img src="/images/logo.jpeg" class="img-fluid" style="width: auto; height: auto;max-width: 40px;max-height: 40px;  padding-top: 8px;">
     </div>
 </div>
 
@@ -87,7 +87,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   <div class="w3-row-padding w3-text-white w3-large">
     <div class="w3-half w3-margin-bottom">
       <div class="w3-display-container">
-        <img src="/k1.jpg" alt="Cinque Terre" style="width:100%">
+        <img src="/images/k1.jpg" alt="Cinque Terre" style="width:100%">
         <span class="w3-display-bottomleft w3-padding">King County</span>
       </div>
     </div>
@@ -95,13 +95,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <div class="w3-row-padding" style="margin:0 -16px">
         <div class="w3-half w3-margin-bottom">
           <div class="w3-display-container">
-            <img src="/land_p.jpg" alt="New York" style="width:100%">
+            <img src="/images/land_p.jpg" alt="New York" style="width:100%">
             <span class="w3-display-bottomleft w3-padding">Pierce County</span>
           </div>
         </div>
         <div class="w3-half w3-margin-bottom">
           <div class="w3-display-container">
-            <img src="/p2.jpg" alt="San Francisco" style="width:100%">
+            <img src="/images/p2.jpg" alt="San Francisco" style="width:100%">
             <span class="w3-display-bottomleft w3-padding">Pierce County</span>
           </div>
         </div>
@@ -109,13 +109,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <div class="w3-row-padding" style="margin:0 -16px">
         <div class="w3-half w3-margin-bottom">
           <div class="w3-display-container">
-              <img src="/land_k.jpg" alt="Pisa" style="width:100%">
+              <img src="/images/land_k.jpg" alt="Pisa" style="width:100%">
             <span class="w3-display-bottomleft w3-padding">King County</span>
           </div>
         </div>
         <div class="w3-half w3-margin-bottom">
           <div class="w3-display-container">
-            <img src="/p3.jpg" alt="Paris" style="width:100%">
+            <img src="/images/p3.jpg" alt="Paris" style="width:100%">
             <span class="w3-display-bottomleft w3-padding">Pierce County</span>
           </div>
         </div>
@@ -130,7 +130,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   </div>
   <div class="w3-row-padding">
     <div class="w3-half w3-margin-bottom">
-      <img src="/se1.jpg" alt="King County House" style="width:100%">
+      <img src="/images/se1.jpg" alt="King County House" style="width:100%">
       <div class="w3-container w3-white">
         <h3>Seattle, King </h3>
         <p class="w3-opacity">Evaluated at 1.2 million dollars</p>
@@ -139,7 +139,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       </div>
     </div>
     <div class="w3-half w3-margin-bottom">
-      <img src="/tacoma_land.jpg" alt="Austria" style="width:100%">
+      <img src="/images/tacoma_land.jpg" alt="Austria" style="width:100%">
       <div class="w3-container w3-white">
         <h3>Tacoma, Pierce</h3>
         <p class="w3-opacity">Evaluated at 250000 dollars</p>
