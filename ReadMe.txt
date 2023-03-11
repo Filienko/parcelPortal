@@ -5,11 +5,10 @@ In order to run the code with custom databse, connection string in the config fi
 if you intend to run the server with your database, as we may not continue to host
 the Database for universal access after Winter 2023 quarter.
 
-The project is simple and therefore, we separated each page in a unique folder, assoicated with the role of a page.
+The project is simple and therefore, we separated each page in a unique folder, associated with the role of a page.
 If you plan to run it with another file structure, certain paths to the .php files may be changed,
 as for production testing, we combined all of the files in a single folder to minimize need to interact
 with VM folder structure. All of the images should be available to index.php, as it hosts all of them, and logo should
 be available to all web pages.
 
-In order to deploy it, download the files and run it in a single folder, our DB currently provides appropraite
-privilages to testuser.
+In order to deploy it, download the files and run it in a single folder, our DB currently provides appropriate privilages to testuser.
